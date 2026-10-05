@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local files
+.claude/
+
+# Logs and scratch
+*.log
+*.tmp
+
+# Exported PDFs from testing
+*.pdf
+
+# Note: src/vendor/ is intentionally tracked so the app works offline.

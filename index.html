@@ -33,26 +33,25 @@
   <meta name="description" content="Self-contained Markdown to PDF converter with live preview, KaTeX math, Mermaid diagrams, and print stylesheet.">
   <title>Markdown → PDF Studio</title>
 
-  <!-- Google Fonts: Inter (Typography) & JetBrains Mono (Code) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- KaTeX Math Rendering CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
-
-  <!-- Highlight.js Syntax Themes (Light & Dark) -->
-  <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-  <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" disabled>
-
-  <!-- External CDN Libraries (Single reliable bundle) -->
-  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension@5.1.0/lib/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <!-- Fully offline: every asset is vendored under src/vendor. CSP blocks all network access. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; form-action 'none'; base-uri 'none'">
+  <link rel="stylesheet" href="src/vendor/katex.min.css">
+  <link rel="stylesheet" id="hljs-light-theme" href="src/vendor/hljs-github.css">
+  <link rel="stylesheet" id="hljs-dark-theme" href="src/vendor/hljs-github-dark.css" disabled>
+  <script src="src/vendor/marked.min.js"></script>
+  <script src="src/vendor/highlight.min.js"></script>
+  <script src="src/vendor/katex.min.js"></script>
+  <script src="src/vendor/marked-katex-extension.js"></script>
+  <script src="src/vendor/mermaid.min.js"></script>
 
   <style>
+    @font-face{font-family:'Inter';font-weight:400;font-display:swap;src:url(src/vendor/fonts/inter-400.woff2) format('woff2')}
+    @font-face{font-family:'Inter';font-weight:500;font-display:swap;src:url(src/vendor/fonts/inter-500.woff2) format('woff2')}
+    @font-face{font-family:'Inter';font-weight:600;font-display:swap;src:url(src/vendor/fonts/inter-600.woff2) format('woff2')}
+    @font-face{font-family:'Inter';font-weight:700;font-display:swap;src:url(src/vendor/fonts/inter-700.woff2) format('woff2')}
+    @font-face{font-family:'JetBrains Mono';font-weight:400;font-display:swap;src:url(src/vendor/fonts/jbmono-400.woff2) format('woff2')}
+    @font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(src/vendor/fonts/jbmono-500.woff2) format('woff2')}
+    @font-face{font-family:'JetBrains Mono';font-weight:600;font-display:swap;src:url(src/vendor/fonts/jbmono-600.woff2) format('woff2')}
     /* ==========================================================================
        CSS Variables & Design System Tokens
        ========================================================================== */

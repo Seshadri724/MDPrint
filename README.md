@@ -1,130 +1,100 @@
-# Markdown → PDF Studio (MDPrint)
+# MDPrint
 
-A zero-dependency, self-contained Markdown editor and live preview tool designed for exporting high-fidelity, vector-crisp PDF documents using the browser's native print rasterizer.
+A private, local-first Markdown reader and PDF exporter. Write or open a `.md` file, read it without the syntax noise, and export it to PDF. Nothing is uploaded anywhere, and it works with no internet connection.
 
-**No build step. No npm. No server.** Just double-click `index.html` to run in any modern web browser.
+No build step, no npm, no server. Open `index.html` in a modern browser.
 
----
+## Privacy and offline use
 
-## ✨ Features
+- All libraries and fonts are bundled in `src/vendor/`. The app makes no network requests.
+- `index.html` sets a Content Security Policy (`default-src 'none'`, `connect-src 'self'`), so the browser itself blocks the page from sending data to other servers.
+- Drafts are kept in your browser's `localStorage` and never leave your machine.
+- The CSP still allows `'unsafe-inline'` and `'unsafe-eval'` for scripts, because the app code is inline and Mermaid uses `eval`.
 
-- **Two-Pane Workspace**:
-  - Left pane: Raw Markdown editor with monospace typography, 2-space tab indentation, and quick formatting shortcuts.
-  - Right pane: Live preview sheet styled like a clean desktop publication.
-  - Interactive Splitter: Draggable divider to adjust pane widths (double-click to reset 50/50).
-  - Responsive: Automatically stacks vertically on screens $\le 768\text{px}$.
+## Features
 
-- **GitHub Flavored Markdown (GFM)**:
-  - Formatted tables with zebra-striping and bold headers.
-  - Task lists with custom interactive checkboxes (no bullet artifacts).
-  - Strikethrough (`~~text~~`), autolinks, blockquotes, and headings.
+- Split view: Markdown editor on the left, live preview on the right, with a draggable splitter (double-click to reset to 50/50). Stacks vertically on narrow screens.
+- GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks, blockquotes.
+- Syntax highlighting (highlight.js) with language labels and a copy button on code blocks.
+- Math with KaTeX: inline `$E = mc^2$` and display `$$ ... $$`.
+- Mermaid diagrams from fenced `mermaid` blocks.
+- PDF export through the browser's print engine, which gives vector output with selectable text. The print stylesheet sets 18mm margins, hides the UI, avoids page breaks inside code blocks, tables, images and diagrams, wraps long code lines, and prints links as plain text.
+- Light and dark themes; dark mode carries over to the PDF.
+- Auto-save of the draft, filename, theme and splitter position.
+- Open `.md` / `.txt` files with the button or by drag and drop.
+- Copy the rendered HTML to the clipboard.
+- Word count, character count and reading time.
 
-- **Advanced Document Add-ons**:
-  - **Code Syntax Highlighting**: Powered by `highlight.js` with language detection, language badges, and a 1-click "Copy" code button.
-  - **KaTeX Mathematical Notation**: Renders inline formulas (`$E = mc^2$`) and display equation blocks (`$$\dots$$`).
-  - **Mermaid.js Vector Diagrams**: Renders interactive, infinite-resolution SVGs for ````mermaid flowcharts, sequence diagrams, and class graphs.
+## Usage
 
-- **Native Vector PDF Export (Browser Print Engine)**:
-  - Generates crisp, selectable, searchable PDFs without blurry rasterization (`html2canvas` and `jsPDF` are not used).
-  - Strict print stylesheet rules:
-    - `@page { margin: 18mm }`
-    - Automatically hides headers, toolbars, buttons, editor pane, and scrollbars.
-    - Prevents orphaned headings: `h1, h2, h3, h4, h5, h6 { break-after: avoid; }`
-    - Prevents page breaks inside blocks: `pre, table, img, blockquote, .mermaid-wrapper, .katex-display, tr { break-inside: avoid; }`
-    - Wraps long code lines (`white-space: pre-wrap; word-break: break-word;`) so code never clips off the page.
-    - Constrains images to `max-width: 100%`.
-    - Converts hyperlinks to inherited-color plain text (no bright blue underlines).
+1. Open `index.html` in Chrome, Edge, Firefox or Safari.
+2. Type, paste, or open a Markdown file.
+3. Click **Export PDF** (or press Ctrl+P / Cmd+P).
 
-- **Theme & Persistence**:
-  - **Dark Mode**: High-contrast slate dark theme that also syncs with the print output.
-  - **LocalStorage Auto-Save**: Automatically preserves your draft, active filename, theme, and splitter position across browser reloads.
-  - **File Reader & Drag-and-Drop**: Load `.md` or `.txt` files with the "Open .md" button or by dragging files directly into the browser window.
-  - **Copy HTML**: 1-click button to copy the rendered HTML directly to the clipboard.
-  - **Document Statistics**: Real-time word count, character count, and reading time estimation.
+In the print dialog:
 
----
+- Destination: Save as PDF.
+- Margins: Default (the stylesheet already sets 18mm).
+- Background graphics: on, if you want code block backgrounds, table shading or dark mode colors.
+- Headers and footers: off, for a clean page without date and URL stamps.
 
-## 🚀 Quick Start
+## Shortcuts
 
-1. Double-click `index.html` to open it in Google Chrome, Microsoft Edge, Mozilla Firefox, or Safari.
-2. Edit or paste Markdown into the left editor pane.
-3. Click **"Export PDF"** (or press <kbd>Ctrl+P</kbd> / <kbd>Cmd+P</kbd>).
-
----
-
-## 🖨️ PDF Export Tips
-
-When the browser print dialog opens:
-- **Destination**: Choose *"Save as PDF"*.
-- **Margins**: Set to *"Default"* (the stylesheet already configures precise `18mm` margins).
-- **Background Graphics**: Ensure *"Background graphics"* is **checked** if you want code block backgrounds, table shading, or dark mode background colors to appear in the PDF.
-- **Headers and Footers**: Uncheck if you prefer a clean document without browser date/URL stamps.
-
----
-
-## ⌨️ Shortcuts & Formatting Helpers
-
-| Shortcut / Action | Description |
+| Shortcut | Action |
 | :--- | :--- |
-| <kbd>Tab</kbd> | Indent line(s) by 2 spaces |
-| <kbd>Shift</kbd> + <kbd>Tab</kbd> | Dedent line(s) by 2 spaces |
-| <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> + <kbd>P</kbd> | Open print / PDF export dialog |
-| Double-click Splitter | Reset editor and preview to 50/50 split |
-| **Sample Button** | Replaces current draft with a comprehensive feature showcase |
+| Tab | Indent selected lines by 2 spaces |
+| Shift + Tab | Dedent selected lines by 2 spaces |
+| Ctrl / Cmd + P | Print / export PDF |
+| Double-click splitter | Reset to 50/50 |
 
----
+The **Sample** button replaces the draft with a demo document covering every feature.
 
-## 📁 Project Structure
+## Project structure
 
 ```
-md preview tool/
-├── index.html     # Single self-contained HTML application
-└── README.md      # Documentation and usage guide
+index.html          Application (HTML, CSS and JS in one file)
+src/vendor/         Bundled libraries and fonts
+README.md
 ```
 
----
+## Bundled libraries
 
-## 📊 How MDPrint Compares
+| Library | Version | Purpose |
+| :--- | :--- | :--- |
+| [marked](https://marked.js.org/) | 15.0.7 | Markdown parser |
+| [highlight.js](https://highlightjs.org/) | 11.9.0 | Code highlighting |
+| [KaTeX](https://katex.org/) | 0.16.10 | Math rendering |
+| [marked-katex-extension](https://github.com/UziTech/marked-katex-extension) | 5.1.0 | KaTeX integration for marked |
+| [Mermaid](https://mermaid.js.org/) | 10.9.1 | Diagrams |
+| [Inter](https://rsms.me/inter/), [JetBrains Mono](https://www.jetbrains.com/lp/mono/) | latin subsets | Fonts, via Fontsource |
 
-| Feature | **MDPrint** | Typora ($15) | Obsidian (Free) | StackEdit | Dillinger | VS Code + Extension |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Setup Required** | ❌ None — just open HTML | Install app | Install app + plugins | Create account | Open website | Install editor + extensions |
-| **Works Offline** | ✅ Yes (after first load) | ✅ Yes | ✅ Yes | ❌ No | ❌ No | ✅ Yes |
-| **PDF Export Quality** | ✅ Vector (native print) | ✅ Vector | ⚠️ Plugin-dependent | ⚠️ Rasterized | ⚠️ Basic | ⚠️ Plugin-dependent |
-| **Selectable Text in PDF** | ✅ 100% | ✅ Yes | ⚠️ Varies | ❌ No | ❌ No | ⚠️ Varies |
-| **Math (LaTeX/KaTeX)** | ✅ Built-in | ✅ Built-in | ⚠️ Plugin | ✅ Built-in | ❌ No | ⚠️ Plugin |
-| **Mermaid Diagrams** | ✅ Built-in | ⚠️ Plugin | ⚠️ Plugin | ❌ No | ❌ No | ⚠️ Plugin |
-| **Code Syntax Highlighting** | ✅ 190+ languages | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| **Dark Mode** | ✅ Yes (syncs to PDF) | ✅ Yes | ✅ Yes | ❌ No | ❌ No | ✅ Yes |
-| **Live Preview** | ✅ Real-time | ✅ WYSIWYG | ✅ Real-time | ✅ Real-time | ✅ Real-time | ✅ Real-time |
-| **Portable (single file)** | ✅ 1 HTML file | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
-| **Data Privacy** | ✅ 100% local | ✅ Local | ✅ Local | ❌ Cloud-stored | ❌ Cloud-stored | ✅ Local |
-| **Cost** | **Free** | $14.99 | Free (core) | Free (limited) | Free | Free |
-| **File Size** | ~60 KB | ~80 MB | ~300 MB | N/A (web) | N/A (web) | ~300 MB + plugins |
+To update a library, replace its file in `src/vendor/` with the new release.
 
-### Where MDPrint Wins
+## Comparison with other tools
 
-- **Zero friction**: No install, no account, no build step. Download one file → double-click → you're working. Share it via email, USB stick, or Slack and the recipient can use it immediately.
-- **Superior PDF output**: The browser's native print engine produces vector-quality PDFs with fully selectable, searchable text. Tools using `html2canvas` or `jsPDF` rasterize text into blurry pixels.
-- **Air-gapped / restricted environments**: Works on machines where you can't install software — government networks, corporate lockdown PCs, shared lab computers. Just drop the HTML file and open it.
-- **True portability**: Your entire editor + renderer + preview + PDF exporter fits in a single ~60 KB file. No dependency on a cloud service that could shut down, change pricing, or hold your data hostage.
-- **Math + Diagrams + Code in one tool**: KaTeX, Mermaid.js, and Highlight.js are all built-in. No hunting for plugins, no compatibility issues, no configuration.
+Approximate, based on default setups; check each tool for current details.
 
-### Where Others Win (honest trade-offs)
+| | MDPrint | Typora | Obsidian | StackEdit | Dillinger | VS Code + extensions |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Setup | None, open one HTML file | Install app | Install app, plugins for extras | Web app, account for sync | Web app | Install editor and extensions |
+| Offline | Yes | Yes | Yes | Limited | No | Yes |
+| PDF export | Vector, via browser print | Vector, built in | Built-in export; extras via plugins | Rendered by a server-side service | Basic | Via extension |
+| Math (KaTeX/LaTeX) | Built in | Built in | Built in | Built in | No | Via extension |
+| Mermaid | Built in | Built in | Built in | Yes | No | Via extension |
+| Dark mode | Yes, carries into the PDF | Yes | Yes | Yes | Yes | Yes |
+| Editing style | Source plus live preview | WYSIWYG | Source or live preview | Source plus live preview | Source plus live preview | Source plus preview |
+| Single portable file | Yes, plus a `src/vendor/` folder | No | No | No | No | No |
+| Where documents live | Your browser only | Local files | Local vault | Browser, optionally cloud-synced | Browser, optionally cloud-linked | Local files |
+| Cost | Free | Paid | Free for personal use | Free | Free | Free |
+| Install size | Under 5 MB | Tens of MB | Hundreds of MB | None (web) | None (web) | Hundreds of MB |
 
-- **Typora** offers true WYSIWYG editing (no split panes), more export formats (DOCX, EPUB, LaTeX), and custom CSS themes.
-- **Obsidian** has a massive plugin ecosystem, bi-directional linking, graph view, and is built for long-term knowledge management — not just single-document editing.
-- **VS Code** is a full IDE with Git integration, terminal, debugging, and thousands of extensions — MDPrint is intentionally simpler.
-- **StackEdit / Dillinger** offer real-time collaboration and cloud sync — MDPrint is local-only by design.
+Where MDPrint differs: no install or account, works on locked-down machines, nothing leaves the browser, and PDFs keep selectable text.
 
----
+Where the others are stronger: Typora offers WYSIWYG editing and more export formats; Obsidian has plugins, linking and a graph view for managing many notes; VS Code is a full editor with Git and debugging; StackEdit and Dillinger offer cloud sync.
 
-## 🛠️ Dependencies
+## Limitations
 
-Loaded directly via CDN (no installation or bundler required):
-- [Marked.js](https://marked.js.org/) — Fast Markdown and GFM parser
-- [Highlight.js](https://highlightjs.org/) — Syntax highlighting for code blocks
-- [KaTeX](https://katex.org/) — Math formula typesetting
-- [marked-katex-extension](https://github.com/markedjs/marked-katex-extension) — KaTeX integration for Marked
-- [Mermaid.js](https://mermaid.js.org/) — Vector diagram rendering
-
+- It is a single-document tool. There is no file library, linking or plugin system; use Obsidian or VS Code for that.
+- Editing is source plus preview, not WYSIWYG like Typora.
+- Export is PDF only.
+- Only the Latin subsets of the bundled fonts are included; other scripts fall back to system fonts.
