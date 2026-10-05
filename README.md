@@ -1,4 +1,4 @@
-# Markdown → PDF Studio (MarkPrint)
+# Markdown → PDF Studio (MDPrint)
 
 A zero-dependency, self-contained Markdown editor and live preview tool designed for exporting high-fidelity, vector-crisp PDF documents using the browser's native print rasterizer.
 
@@ -84,9 +84,9 @@ md preview tool/
 
 ---
 
-## 📊 How MarkPrint Compares
+## 📊 How MDPrint Compares
 
-| Feature | **MarkPrint** | Typora ($15) | Obsidian (Free) | StackEdit | Dillinger | VS Code + Extension |
+| Feature | **MDPrint** | Typora ($15) | Obsidian (Free) | StackEdit | Dillinger | VS Code + Extension |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Setup Required** | ❌ None — just open HTML | Install app | Install app + plugins | Create account | Open website | Install editor + extensions |
 | **Works Offline** | ✅ Yes (after first load) | ✅ Yes | ✅ Yes | ❌ No | ❌ No | ✅ Yes |
@@ -102,7 +102,7 @@ md preview tool/
 | **Cost** | **Free** | $14.99 | Free (core) | Free (limited) | Free | Free |
 | **File Size** | ~60 KB | ~80 MB | ~300 MB | N/A (web) | N/A (web) | ~300 MB + plugins |
 
-### Where MarkPrint Wins
+### Where MDPrint Wins
 
 - **Zero friction**: No install, no account, no build step. Download one file → double-click → you're working. Share it via email, USB stick, or Slack and the recipient can use it immediately.
 - **Superior PDF output**: The browser's native print engine produces vector-quality PDFs with fully selectable, searchable text. Tools using `html2canvas` or `jsPDF` rasterize text into blurry pixels.
@@ -114,8 +114,8 @@ md preview tool/
 
 - **Typora** offers true WYSIWYG editing (no split panes), more export formats (DOCX, EPUB, LaTeX), and custom CSS themes.
 - **Obsidian** has a massive plugin ecosystem, bi-directional linking, graph view, and is built for long-term knowledge management — not just single-document editing.
-- **VS Code** is a full IDE with Git integration, terminal, debugging, and thousands of extensions — MarkPrint is intentionally simpler.
-- **StackEdit / Dillinger** offer real-time collaboration and cloud sync — MarkPrint is local-only by design.
+- **VS Code** is a full IDE with Git integration, terminal, debugging, and thousands of extensions — MDPrint is intentionally simpler.
+- **StackEdit / Dillinger** offer real-time collaboration and cloud sync — MDPrint is local-only by design.
 
 ---
 
